@@ -1,0 +1,279 @@
+<!-- form_page.html -->
+{% extends "base.html" %}
+{% block title%} FORM {% endblock %}
+{% block CarWizard%} <a class="navbar-brand">CarWorthWizard </a> {% endblock %}
+{% block navbar %}
+<ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="{% url 'priceForm:previous' %}">Your Previous</a>
+    </li>
+</ul>
+<ul class="navbar-nav ms-auto">
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="{%url 'logout' %}">Logout</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page">Welcome, {{user.get_full_name|title}}</a>
+      </li>
+</ul>
+
+{% endblock %}
+{% block content%}
+<div class="container mt-3">
+    <div class="col">
+        <h1>Information of your car</h1>
+        <hr>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="id_Marka" class="form-label">Marka</label>
+                    <input type="text" class="form-control" name="Marka" id="id_Marka">
+                    <div id="markaSuggestions" class="list-group suggestions-container">
+                        <!-- Burada marka önerileri görünecek -->
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="id_Seri" class="form-label">Seri</label>
+                    <input type="text" class="form-control" name="Seri" id="id_Seri">
+                    <div id="seriSuggestions" class="list-group suggestions-container">
+                        <!-- Burada seri önerileri görünecek -->
+                    </div>
+                </div>
+                <div class="col">
+                    <label for="id_Model" class="form-label">Model</label>
+                    <input type="text" class="form-control" name="Model" id="id_Model">
+                    <div id="modelSuggestions" class="list-group suggestions-container">
+                        <!-- Burada model önerileri görünecek -->
+                    </div>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="id_Yıl" class="form-label">Yıl</label>
+                    <input type="number" class="form-control" name="Yıl" id="id_Yıl"  min="1900" max="{{ yil_actual }}" placeholder="YYYY">
+                </div>
+                <div class="col">
+                    <label for="id_Kilometre" class="form-label">Kilometre</label>
+                    <input type="number" class="form-control" name="Kilometre" id="id_Kilometre" step="any" value="{{ kilometre }}" placeholder="Kilometre">
+                </div>
+                
+                <div class="col">
+                    <label for="id_VitesTipi" class="form-label">Vites Tipi</label>
+                    <select class="form-select" name="VitesTipi" id="id_VitesTipi">
+                        <option value="">Seçiniz</option>
+                        {% for vites_tipi in vites_tipleri %}
+                        <option value="{{ vites_tipi }}">{{ vites_tipi }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="id_YakıtTipi" class="form-label">Yakıt Tipi</label>
+                    <select class="form-select" name="YakıtTipi" id="id_YakıtTipi">
+                        <option value="">Seçiniz</option>
+                        {% for yakit_tipi in yakit_tipleri %}
+                        <option value="{{ yakit_tipi }}">{{ yakit_tipi }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="id_KasaTipi" class="form-label">Kasa Tipi</label>
+                    <select class="form-select" name="KasaTipi" id="id_KasaTipi">
+                        <option value="">Seçiniz</option>
+                        {% for kasa_tipi in kasa_tipleri %}
+                        <option value="{{ kasa_tipi }}">{{ kasa_tipi }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="id_MotorHacmi" class="form-label">Motor Hacmi</label>
+                    <input type="number" class="form-control" name="MotorHacmi" id="id_MotorHacmi" step="any" value="{{ motor_hacmi }}" placeholder="????? cc">
+                </div>
+                <div class="col">
+                    <label for="id_MotorGücü" class="form-label">Motor Gücü</label>
+                    <input type="number" class="form-control" name="MotorGücü" id="id_MotorGücü" step="any" value="{{ motor_gücü }}" placeholder="??? hp">
+                </div>
+                
+            </div>
+            <div class="row mb-3">
+                <div class="col">
+                    <label for="id_Çekiş" class="form-label">Çekiş</label>
+                    <select class="form-select" name="Çekiş" id="id_Çekiş">
+                        <option value="">Seçiniz</option>
+                        {% for çekiş_tipi in çekiş_tipleri %}
+                        <option value="{{ çekiş_tipi }}">{{ çekiş_tipi }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+                    <label for="id_OrtYakıtTüketimi" class="form-label">Ortalama Yakıt Tüketimi</label>
+                    <input type="number" class="form-control" name="OrtYakıtTüketimi" id="id_OrtYakıtTüketimi" step="0.1" value="{{ ort_yakit_tük }}" oninput="checkDecimalInput(event)">
+                </div>                
+                <div class="col">
+                    <label for="id_YakıtDeposu" class="form-label">Yakıt Deposu</label>
+                    <input type="number" class="form-control" name="YakıtDeposu" id="id_YakıtDeposu" value="{{ yakit_deposu }}" step="0.1" min="0" max="1000">
+                </div>
+                
+            </div>
+            <input type="submit" value="Find the Price" class="btn btn-primary">
+        </form>
+    </div>
+</div>
+<style>
+    /* Estilos para las sugerencias de Marka, Seri y Model */
+    .suggestions-container {
+        position: fixed;
+        z-index: 9999;
+        background-color: #fff;
+        max-height: 200px; /* Ajusta la altura máxima del contenedor según tus necesidades */
+        overflow-y: auto; /* Habilita el desplazamiento vertical si hay demasiadas sugerencias */
+        border: 1px solid #ccc; /* Agrega un borde para resaltar el contenedor */
+        border-radius: 4px; /* Añade esquinas redondeadas al contenedor */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Agrega una sombra para resaltar el contenedor */
+    }
+
+    .suggestions-container a {
+        display: block;
+        padding: 8px 12px;
+        text-decoration: none; /* Quita el subrayado del enlace */
+        color: #333; /* Cambia el color del texto */
+    }
+
+    .suggestions-container a:hover {
+        background-color: #f5f5f5; /* Cambia el color de fondo al pasar el ratón sobre el enlace */
+    }
+</style>
+
+
+
+<script>
+        function checkDecimalInput(event) {
+        const input = event.target;
+        const value = input.value;
+
+        if (value !== "" && !isDecimal(value)) {
+            input.setCustomValidity("Ondalık bir değer girin (Örn: 8.5 veya 10.34)");
+        } else {
+            input.setCustomValidity("");
+        }
+    }
+
+    function isDecimal(value) {
+        // Ondalık sayıyı kontrol eden basit bir regular expression
+        return /^\d+(\.\d{1,2})?$/.test(value);
+    }
+    // Marka önerilerini almak için Ajax isteği gönderme fonksiyonu
+    function getMarkaSuggestions(marka) {
+        $.ajax({
+            url: "/api/get_marka_suggestions/",
+            data: {
+                "marka": marka,
+            },
+            success: function (data) {
+                var suggestions = data.marka_suggestions;
+                var suggestionsDiv = $("#markaSuggestions");
+                suggestionsDiv.empty();
+                suggestions.forEach(function (suggestion) {
+                    var suggestionLink = $('<a>', {
+                        href: '#',
+                        text: suggestion,
+                        click: function () {
+                            $("#id_Marka").val(suggestion);
+                            suggestionsDiv.empty();
+                        }
+                    });
+                    suggestionsDiv.append(suggestionLink);
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function getSeriSuggestions(seri) {
+        $.ajax({
+            url: "/api/get_seri_suggestions/",
+            data: {
+                "seri": seri,
+            },
+            success: function (data) {
+                var suggestions = data.seri_suggestions;
+                var suggestionsDiv = $("#seriSuggestions");
+                suggestionsDiv.empty();
+                suggestions.forEach(function (suggestion) {
+                    var suggestionLink = $('<a>', {
+                        href: '#',
+                        text: suggestion,
+                        click: function () {
+                            $("#id_Seri").val(suggestion);
+                            suggestionsDiv.empty();
+                        }
+                    });
+                    suggestionsDiv.append(suggestionLink);
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    function getModelSuggestions(model) {
+        $.ajax({
+            url: "/api/get_model_suggestions/",
+            data: {
+                "model": model,
+            },
+            success: function (data) {
+                var suggestions = data.model_suggestions;
+                var suggestionsDiv = $("#modelSuggestions");
+                suggestionsDiv.empty();
+                suggestions.forEach(function (suggestion) {
+                    var suggestionLink = $('<a>', {
+                        href: '#',
+                        text: suggestion,
+                        click: function () {
+                            $("#id_Model").val(suggestion);
+                            suggestionsDiv.empty();
+                        }
+                    });
+                    suggestionsDiv.append(suggestionLink);
+                });
+            },
+            error: function (error) {
+                console.log(error);
+            }
+        });
+    }
+
+    $("#id_Marka").on("input", function () {
+        var marka = $(this).val();
+        if (marka.length >= 2) {
+            getMarkaSuggestions(marka);
+        } else {
+            $("#markaSuggestions").empty();
+        }
+    });
+
+    $("#id_Seri").on("input", function () {
+        var seri = $(this).val();
+        if (seri.length >= 2) {
+            getSeriSuggestions(seri);
+        } else {
+            $("#seriSuggestions").empty();
+        }
+    });
+
+    $("#id_Model").on("input", function () {
+        var model = $(this).val();
+        if (model.length >= 2) {
+            getModelSuggestions(model);
+        } else {
+            $("#modelSuggestions").empty();
+        }
+    });
+</script>
+{% endblock %}

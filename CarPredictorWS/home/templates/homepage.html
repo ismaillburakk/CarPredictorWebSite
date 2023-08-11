@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Website</title>
+    <style>
+        body {
+            background-color: #2b80ff63;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .button-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button {
+            width: 150px;
+            height: 150px;
+            margin: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .login {
+            background-color: #007bff; /* Mavi renk */
+        }
+
+        .signup {
+            background-color: #28a745; /* Yeşil renk */
+        }
+    </style>
+</head>
+<body>
+    <div class="button-container">
+        <button class="button login" onclick="window.location.href='/login/'">Login</button>
+        <button class="button signup" onclick="window.location.href='/signup/'">SignUp</button>
+    </div>
+</body>
+</html>
