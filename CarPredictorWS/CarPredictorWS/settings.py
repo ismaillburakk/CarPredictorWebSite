@@ -119,10 +119,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-STATICFILES_DIRS= [
-    BASE_DIR / "static"
-]
+STATIC_URL = '/static/'
+
+# Add STATIC_ROOT to specify where collected static files will be placed
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+
+# Update STATICFILES_DIRS to an empty list since you're using STATIC_ROOT
+STATICFILES_DIRS = []
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
