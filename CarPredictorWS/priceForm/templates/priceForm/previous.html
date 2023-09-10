@@ -3,23 +3,44 @@
 {% block CarWizard%} <a class="navbar-brand">CarWorthWizard </a> {% endblock %}
 {% block navbar %}
 <ul class="navbar-nav">
-    <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'priceForm:form' %}">Form Page</a>
+    <li class="nav-item" >
+      <a class="nav-link active" style="color: white;" aria-current="page" href="{% url 'priceForm:form' %}">Form Page</a>
+    </li>
+    <li class="nav-item" style="background-color: #fff4e3; border-radius: 10px;">
+        <a class="nav-link active" style="color: black;" aria-current="page" href=#>Your Previous</a>
     </li>
 </ul>
 <ul class="navbar-nav ms-auto">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{%url 'logout' %}">Logout</a>
+        <a class="nav-link active" style="color: white;" aria-current="page" href="{%url 'logout' %}">Logout</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page">Welcome, {{user.get_full_name|title}}</a>
+        <a class="nav-link active" style="color: white;" aria-current="page">Welcome, {{user.get_full_name|title}}</a>
       </li>
 </ul>
 {% endblock %}
 {% block content%}
-<table class="table">
-    <thead>
-        <tr>
+<style>
+    body {
+        background-color: #fff4e3;
+    }
+
+    table {
+        background-color: #fff4e3;
+        width: 100%; /* Tablo genişliği 100% olarak ayarlandı */
+        border-collapse: collapse;
+    }
+
+    th, td {
+        padding: 8px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+</style>
+<table  style="background-color:#fff4e3;">
+    <thead >
+        <tr >
+            <th>TahminiFiyat</th>
             <th>Marka</th>
             <th>Seri</th>
             <th>Model</th>
@@ -31,26 +52,23 @@
             <th>MotorHacmi</th>
             <th>MotorGücü</th>
             <th>Çekiş</th>
-            <th>OrtYakıtTüketimi</th>
-            <th>YakıtDeposu</th>
         </tr>
     </thead>
     <tbody>
         {% for car in user_cars %}
             <tr>
+                <td>{{ car.TahminiFiyat|floatformat:0 }}</td>
                 <td>{{ car.Marka }}</td>
                 <td>{{ car.Seri }}</td>
                 <td>{{ car.Model }}</td>
                 <td>{{ car.Yıl }}</td>
-                <td>{{ car.Kilometre }}</td>
+                <td>{{ car.Kilometre|floatformat:0 }}</td>
                 <td>{{ car.VitesTipi }}</td>
                 <td>{{ car.YakıtTipi }}</td>
                 <td>{{ car.KasaTipi }}</td>
-                <td>{{ car.MotorHacmi }}</td>
-                <td>{{ car.MotorGücü }}</td>
+                <td>{{ car.MotorHacmi|floatformat:0 }}</td>
+                <td>{{ car.MotorGücü|floatformat:0 }}</td>
                 <td>{{ car.Çekiş }}</td>
-                <td>{{ car.OrtYakıtTüketimi }}</td>
-                <td>{{ car.YakıtDeposu }}</td>
             </tr>
         {% endfor %}
     </tbody>

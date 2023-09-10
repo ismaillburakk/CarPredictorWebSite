@@ -5,12 +5,18 @@
 {%block navbar%}
 <ul class="navbar-nav">
     <li class="nav-item">
-      <a class="nav-link active" aria-current="page" href="{% url 'priceForm:form' %}">Form Page</a>
+      <a class="nav-link active" style="color: white;"  aria-current="page" href="{% url 'priceForm:form' %}">Form Page</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" style="color: white;"  aria-current="page" href="{% url 'priceForm:previous' %}">Your Previous</a>
     </li>
 </ul>
 <ul class="navbar-nav ms-auto">
     <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="{%url 'logout' %}">Logout</a>
+        <a class="nav-link active" style="color: white;" aria-current="page" href="{%url 'logout' %}">Logout</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" style="color: white;" aria-current="page">Welcome, {{user.get_full_name|title}}</a>
     </li>
 </ul>
 {% endblock %}
@@ -18,8 +24,11 @@
 <div style="text-align: center;">
     <h1>Form Başarıyla Gönderildi!</h1>
     <h2>Tahmini Araba Fiyatı:</h2>
-    <h1 style="font-size: 50px;">{{ predicted_price|floatformat:0}} TL</h1>
-    
-    <!-- Display other relevant information here -->
+    <h1 style="font-size: 50px;">{{ predicted_price}} TL</h1>
+</div>
+<div class="centered-div">
+    <p style="font-size: 14px; color: gray;">Not: Araba fiyatları 10 Eylül 2023 tarihindeki piyasa bilgilerine göre hesaplanmaktadır</p>
+    <p style="font-size: 14px; color: gray;">Not: Fiyat tahminleri arabanın ekspertiz bilgileri dahil edilmeden hesaplanmaktadır.</p>
+    <p style="font-size: 14px; color: gray;">Not: Tahmin sistemimiz her ayın 15'inde güncellenecektir.</p>
 </div>
 {% endblock %}

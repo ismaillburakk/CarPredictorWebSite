@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from .models import Marka, Seri, Model, VitesTipi, KasaTipi, YakıtTipi, Çekiş
 from .forms import AracForm
-from models.data_preprocessing import preprocess_data, main
+from models.data_preprocessing import main
 from django.contrib.auth import authenticate, logout
 from .models import Arac
 def form_page(request):
@@ -12,8 +12,10 @@ def form_page(request):
             arac=form.save(commit=False)
             arac.author= request.user
             arac.save()
+            predict_value=main()
+            arac.TahminiFiyat = predict_value
+            arac.save()
             return redirect('priceForm:success') 
-
     else:
         form = AracForm()
 
@@ -38,7 +40,25 @@ def form_page(request):
 
 def success(request):
     predict_value=main()
-    context= {'predicted_price': predict_value}
+    tam_sayi=int(predict_value)
+    sayi_str = str(tam_sayi)
+    basamaklar = [int(digit) for digit in sayi_str]
+    if len(basamaklar) == 6:
+        yeni_string = f'{basamaklar[0]}{basamaklar[1]}{basamaklar[2]}.{basamaklar[3]}{basamaklar[4]}{basamaklar[5]}'
+        fixed_value=yeni_string
+    elif len(basamaklar)== 7:
+        yeni_string = f'{basamaklar[0]}.{basamaklar[1]}{basamaklar[2]}{basamaklar[3]}.{basamaklar[4]}{basamaklar[5]}{basamaklar[6]}'
+        fixed_value=yeni_string
+    elif len(basamaklar)==8:
+        yeni_string = f'{basamaklar[0]}{basamaklar[1]}.{basamaklar[2]}{basamaklar[3]}{basamaklar[4]}.{basamaklar[5]}{basamaklar[6]}{basamaklar[7]}'
+        fixed_value=yeni_string
+    elif len(basamaklar)==9:
+        yeni_string = f'{basamaklar[0]}{basamaklar[1]}{basamaklar[2]}.{basamaklar[3]}{basamaklar[4]}{basamaklar[5]}.{basamaklar[6]}{basamaklar[7]}{basamaklar[8]}'
+        fixed_value=yeni_string
+    elif len(basamaklar)==5:
+        yeni_string = f'{basamaklar[0]}{basamaklar[1]}.{basamaklar[2]}{basamaklar[3]}{basamaklar[4]}'
+        fixed_value=yeni_string
+    context= {'predicted_price': fixed_value}
     
     return render(request, 'priceForm/success.html', context)
 

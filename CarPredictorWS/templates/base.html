@@ -1,3 +1,6 @@
+{% load static %}
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +9,10 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg" style="background-color: #2b80ff;">
+<nav class="navbar navbar-expand-lg" style="background-color: rgba(16, 91, 99, 255);">
     <div class="container-fluid">
-      {% block CarWizard%} {% endblock %}
+      <img src="{% static 'images/logo.png' %}" alt="Logo" width="100" height="50">
+      <a class="navbar-brand" style="color: white;">CarWorthWizard </a> 
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -22,3 +26,16 @@
 {% block content%}{% endblock %}
 </body>
 </html>
+<style>
+    .centered-div {
+    text-align: center;
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+    body {
+        background-color: #fff4e3; /* Sarı tonunu temsil eden bir renk kodu */
+    }
+</style>

@@ -51,5 +51,4 @@ class Arac(models.Model):
     MotorHacmi = models.FloatField()
     MotorGücü = models.FloatField()
     Çekiş = models.CharField(max_length=50)
-    OrtYakıtTüketimi = models.FloatField()
-    YakıtDeposu = models.FloatField()
+    TahminiFiyat= models.FloatField(null=True, blank=True)

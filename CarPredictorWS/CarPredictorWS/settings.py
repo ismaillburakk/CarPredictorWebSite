@@ -9,9 +9,9 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
-
+import os
 from pathlib import Path
-
+from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -115,17 +115,23 @@ USE_I18N = True
 
 USE_TZ = True
 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  
+EMAIL_PORT = 587  
+EMAIL_USE_TLS = True  
+EMAIL_USE_SSL = False
+EMAIL_HOST_USER = 'CarWorthWizard@gmail.com'  
+EMAIL_HOST_PASSWORD = 'dahlvsvuxlhfybry'  
 
+# Şifre sıfırlama e-posta ayarları
+PASSWORD_RESET_TIMEOUT_DAYS = 1
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-
-# Add STATIC_ROOT to specify where collected static files will be placed
-STATIC_ROOT = BASE_DIR / 'staticfiles'
-
-# Update STATICFILES_DIRS to an empty list since you're using STATIC_ROOT
-STATICFILES_DIRS = []
+STATIC_URL = 'static/'
+STATICFILES_DIRS= [
+    BASE_DIR / "static"
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
