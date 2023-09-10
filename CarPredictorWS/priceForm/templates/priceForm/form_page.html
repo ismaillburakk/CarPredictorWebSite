@@ -70,6 +70,8 @@
                         {% endfor %}
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="id_YakıtTipi" class="form-label">Yakıt Tipi</label>
                     <select class="form-select" name="YakıtTipi" id="id_YakıtTipi">
@@ -79,8 +81,6 @@
                         {% endfor %}
                     </select>
                 </div>
-            </div>
-            <div class="row mb-3">
                 <div class="col">
                     <label for="id_KasaTipi" class="form-label">Kasa Tipi</label>
                     <select class="form-select" name="KasaTipi" id="id_KasaTipi">
@@ -94,13 +94,12 @@
                     <label for="id_MotorHacmi" class="form-label">Motor Hacmi</label>
                     <input type="number" class="form-control" name="MotorHacmi" id="id_MotorHacmi" step="any" value="{{ motor_hacmi }}" placeholder="????? cc">
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="id_MotorGücü" class="form-label">Motor Gücü</label>
                     <input type="number" class="form-control" name="MotorGücü" id="id_MotorGücü" step="any" value="{{ motor_gücü }}" placeholder="??? hp">
                 </div>
-                
-            </div>
-            <div class="row mb-3">
                 <div class="col">
                     <label for="id_Çekiş" class="form-label">Çekiş</label>
                     <select class="form-select" name="Çekiş" id="id_Çekiş">
