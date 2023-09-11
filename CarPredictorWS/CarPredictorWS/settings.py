@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
+import django_heroku
+import dj_database_url
 from django.contrib.messages import constants as messages
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,6 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+#SECRET_KEY = 'django-insecure-1gld+z9d1mx1o%m_!-262wlemgon8hkp_a$bdm@q#=$rg2v=94'
 SECRET_KEY = 'django-insecure-1gld+z9d1mx1o%m_!-262wlemgon8hkp_a$bdm@q#=$rg2v=94'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -129,9 +132,11 @@ PASSWORD_RESET_TIMEOUT_DAYS = 1
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS= [
-    BASE_DIR / "static"
-]
+STATICFILES_DIRS= (os.path.join(BASE_DIR, "static"),)
+
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
