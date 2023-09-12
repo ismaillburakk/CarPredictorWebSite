@@ -1,1 +1,1 @@
-gunicorn CarPredictorWS.wsgi:application
+gunicorn CarPredictorWS.wsgi:application --log-file
