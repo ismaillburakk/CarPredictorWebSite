@@ -81,14 +81,15 @@ WSGI_APPLICATION = 'CarPredictorWS.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "CarPredictorWS",
-        "USER": "postgres",
-        "PASSWORD": "12345",
-    }
+    'default': dj_database_url.config(
+        default=os.environ.get('DATABASE_URL'),
+        conn_max_age=600,  # Bağlantı süresi sınırı
+        ssl_require=True    # SSL şifrelemeyi gerektir
+    )
 }
+
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
 
