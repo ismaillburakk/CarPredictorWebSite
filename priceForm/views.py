@@ -63,7 +63,6 @@ def success(request):
     return render(request, 'priceForm/success.html', context)
 
 def car_info(request):
-    # Sayfa yüklendiğinde, tüm markaları göstermek için kullanılabilir.
     markalar = Marka.objects.all()
     return render(request, 'form_page.html', {'markalar': markalar})
 

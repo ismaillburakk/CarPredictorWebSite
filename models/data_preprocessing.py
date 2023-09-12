@@ -33,7 +33,7 @@ def main():
 
     preprocessed_data = preprocessed_data.append(en_son_arac_df, ignore_index=True)
 
-    #LabelEncoder
+    
     label_encoder = LabelEncoder()
     for col in preprocessed_data.select_dtypes(include='object'):
         preprocessed_data[col] = label_encoder.fit_transform(preprocessed_data[col])
