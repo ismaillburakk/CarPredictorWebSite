@@ -1,1 +1,1 @@
-web gunicorn CarPredictorWS.wsgi:application
+gunicorn CarPredictorWS.wsgi:application
