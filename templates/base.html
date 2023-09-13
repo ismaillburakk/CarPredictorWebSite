@@ -28,14 +28,56 @@
 </html>
 <style>
     .centered-div {
-    text-align: center;
-    position: absolute;
-    top: 35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+        text-align: center;
+        position: relative; 
+        top: 0;
+        left: 0;
+        transform: none; 
+        margin-top: 20px; 
 }
 
     body {
         background-color: #fff4e3; /* Sarı tonunu temsil eden bir renk kodu */
     }
+    @media screen and (max-width: 992px) {
+    .navbar-nav {
+        display: flex;
+        flex-direction: column; 
+    }
+    
+    .navbar-toggler {
+        background-color: #fff4e3;
+        display: block; 
+    }
+    
+    .navbar-collapse {
+        border-radius: 10px;
+        display: none; 
+        position: absolute;
+        top: 100%; 
+        right: 0;
+        background-color: rgba(16, 91, 99, 255);
+        width: 20%; 
+        z-index: 500; 
+    }
+    
+    .navbar-toggler:focus + .navbar-collapse {
+        display: block; 
+    }
+}
 </style>
+<script>
+    var navbarCollapse = document.querySelector('.navbar-collapse');
+    var navbarToggler = document.querySelector('.navbar-toggler');
+    
+    navbarToggler.addEventListener('click', function() {
+        if (navbarCollapse.style.display === 'block' || getComputedStyle(navbarCollapse).display === 'block') {
+            navbarCollapse.style.display = 'none';
+        } else {
+            navbarCollapse.style.display = 'block';
+        }
+    });
+    window.addEventListener('load', function() {
+        navbarCollapse.style.display = 'none';
+    });
+    </script>

@@ -31,21 +31,21 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="id_Marka" class="form-label">Marka</label>
-                    <input type="text" class="form-control" name="Marka" id="id_Marka">
+                    <input type="text" class="form-control" name="Marka" id="id_Marka" required>
                     <div id="markaSuggestions" class="list-group suggestions-container">
                         <!-- Burada marka önerileri görünecek -->
                     </div>
                 </div>
                 <div class="col">
                     <label for="id_Seri" class="form-label">Seri</label>
-                    <input type="text" class="form-control" name="Seri" id="id_Seri">
+                    <input type="text" class="form-control" name="Seri" id="id_Seri" required>
                     <div id="seriSuggestions" class="list-group suggestions-container">
                         <!-- Burada seri önerileri görünecek -->
                     </div>
                 </div>
                 <div class="col">
                     <label for="id_Model" class="form-label">Model</label>
-                    <input type="text" class="form-control" name="Model" id="id_Model">
+                    <input type="text" class="form-control" name="Model" id="id_Model" required>
                     <div id="modelSuggestions" class="list-group suggestions-container">
                         <!-- Burada model önerileri görünecek -->
                     </div>
@@ -54,11 +54,11 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="id_Yıl" class="form-label">Yıl</label>
-                    <input type="number" class="form-control" name="Yıl" id="id_Yıl"  min="1900" max="{{ yil_actual }}" placeholder="YYYY">
+                    <input type="number" class="form-control" name="Yıl" id="id_Yıl"  min="1900" max="{{ yil_actual }}" placeholder="YYYY" required>
                 </div>
                 <div class="col">
                     <label for="id_Kilometre" class="form-label">Kilometre</label>
-                    <input type="number" class="form-control" name="Kilometre" id="id_Kilometre" step="any" value="{{ kilometre }}" placeholder="Kilometre">
+                    <input type="number" class="form-control" name="Kilometre" id="id_Kilometre" step="any" value="{{ kilometre }}" placeholder="Example: 190000" required>
                 </div>
                 
                 <div class="col">
@@ -70,6 +70,8 @@
                         {% endfor %}
                     </select>
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col">
                     <label for="id_YakıtTipi" class="form-label">Yakıt Tipi</label>
                     <select class="form-select" name="YakıtTipi" id="id_YakıtTipi">
@@ -79,8 +81,6 @@
                         {% endfor %}
                     </select>
                 </div>
-            </div>
-            <div class="row mb-3">
                 <div class="col">
                     <label for="id_KasaTipi" class="form-label">Kasa Tipi</label>
                     <select class="form-select" name="KasaTipi" id="id_KasaTipi">
@@ -92,15 +92,14 @@
                 </div>
                 <div class="col">
                     <label for="id_MotorHacmi" class="form-label">Motor Hacmi</label>
-                    <input type="number" class="form-control" name="MotorHacmi" id="id_MotorHacmi" step="any" value="{{ motor_hacmi }}" placeholder="????? cc">
+                    <input type="number" class="form-control" name="MotorHacmi" id="id_MotorHacmi" step="any" value="{{ motor_hacmi }}" placeholder="????? cc" required>
                 </div>
-                <div class="col">
-                    <label for="id_MotorGücü" class="form-label">Motor Gücü</label>
-                    <input type="number" class="form-control" name="MotorGücü" id="id_MotorGücü" step="any" value="{{ motor_gücü }}" placeholder="??? hp">
-                </div>
-                
             </div>
             <div class="row mb-3">
+                <div class="col">
+                    <label for="id_MotorGücü" class="form-label">Motor Gücü</label>
+                    <input type="number" class="form-control" name="MotorGücü" id="id_MotorGücü" step="any" value="{{ motor_gücü }}" placeholder="??? hp" required>
+                </div>
                 <div class="col">
                     <label for="id_Çekiş" class="form-label">Çekiş</label>
                     <select class="form-select" name="Çekiş" id="id_Çekiş">

@@ -29,30 +29,31 @@
             {% endif %}
             <div class="mb-3">
                 <label for="username" class="form-label">Username</label>
-                <input type="text" class="form-control" name="username" value="{{ username }}">
+                <input type="text" class="form-control" name="username" id="username" value="{{ username }}" oninput="validateUsername()"  required>
+                <div id="usernameError" style="color: red;"></div> 
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" name="email" value="{{ email }}">
+                <input type="email" class="form-control" name="email" value="{{ email }}"  required>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <label for="firstname" class="form-label">Firstname</label>
-                    <input type="text" class="form-control" name="firstname" value="{{ firstname }}">
+                    <input type="text" class="form-control" name="firstname" value="{{ firstname }}"  required>
                 </div>
                 <div class="col">
                     <label for="lastname" class="form-label">Lastname</label>
-                    <input type="text" class="form-control" name="lastname" value="{{ lastname }}">
+                    <input type="text" class="form-control" name="lastname" value="{{ lastname }}"  required>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password"  required>
                 </div>
                 <div class="col">
                     <label for="repassword" class="form-label">Re-Password</label>
-                    <input type="password" class="form-control" name="repassword">
+                    <input type="password" class="form-control" name="repassword"  required>
                 </div>
             </div>
 
@@ -61,4 +62,33 @@
         </form>  
     </div> 
 </div>  
+
+<script>
+function validateUsername() {
+    var usernameInput = document.getElementById("username");
+    var usernameValue = usernameInput.value.trim(); // Boşlukları kaldırmak için trim() kullanıyoruz.
+
+    // Boşlukları ve geçersiz karakterleri kontrol etmek için bir düzenli ifade kullanabilirsiniz.
+    var usernamePattern = /^[A-Za-z0-9]+$/; // Sadece harf ve rakamlar izin verir.
+
+    var usernameError = document.getElementById("usernameError");
+
+    if (usernameValue.length === 0) {
+        // Kullanıcı adı boşsa hata mesajını görüntüle.
+        usernameError.innerHTML = "Kullanıcı adı boş olamaz!";
+        // Formu göndermeyi engelle.
+        return false;
+    } else if (!usernamePattern.test(usernameValue)) {
+        // Kullanıcı adı geçerli değilse hata mesajını görüntüle.
+        usernameError.innerHTML = "Geçersiz karakter içeriyor veya boşluk içeremez!";
+        // Formu göndermeyi engelle.
+        return false;
+    } else {
+        // Kullanıcı adı geçerli ise hata mesajını temizle.
+        usernameError.innerHTML = "";
+        // Formu göndermeye izin ver.
+        return true;
+    }
+}
+</script>
 {% endblock %}
